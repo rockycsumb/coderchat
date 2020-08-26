@@ -16,8 +16,7 @@ function Chat() {
 	return(
 		<div className="chat">
 			{/*this is from rm */}
-			
-			{/*this is from sm */}
+		
 			<div className="chat_header">
 				<Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
 				
