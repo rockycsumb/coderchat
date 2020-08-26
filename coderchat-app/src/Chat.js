@@ -15,7 +15,8 @@ function Chat() {
 	
 	return(
 		<div className="chat">
-			{/*SM COMMENT */}
+			
+			{/*RM COMMENT */}
 		
 			<div className="chat_header">
 				<Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
