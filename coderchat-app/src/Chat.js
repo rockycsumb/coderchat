@@ -64,19 +64,14 @@ function Chat() {
 					{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}
 					</p>
 				</div>
+			</div>
+			
+			<div className="chat_header_mobile">
 				
-				<div className="chat_headerRight">
-					
-					<IconButton>
-						<DonutLargeIcon />
-					</IconButton>
-					<IconButton>
-						<ChatIcon />
-					</IconButton>
-					<IconButton>
-						<MoreVertIcon />
-					</IconButton>
-					
+				<Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
+				
+				<div >
+					<h6>{roomName}</h6>
 				</div>
 			</div>
 			

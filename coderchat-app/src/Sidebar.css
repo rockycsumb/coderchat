@@ -12,7 +12,6 @@
 	justify-content: space-between;
 	padding: 20px;
 	border-right: 1px solid lightgray;
-	border: 5px orange solid;
 }
 
 @media only screen and (min-width: 768px) {
