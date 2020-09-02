@@ -3,13 +3,23 @@
 	place-items: center;
 	background-color: #dadbd3;
 	height: 100vh;
+	border: solid pink 1px;
 }
 
 .app_body {
 	display: flex;
+	flex-direction: column;
 	background-color: #ededed;
 	margin-top: -50px;
 	height: 90vh;
 	width: 90vw;
 	box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
+	border: solid green 4px;
+}
+
+@media only screen and (min-width: 768px) {
+	.app_body {
+		flex-direction: row;
+		border: solid red 4px;
+	}
 }

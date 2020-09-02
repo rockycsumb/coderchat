@@ -13,9 +13,9 @@ function App() {
   return (
 	// BEM naving convention
     <div className="app">
-	 {!user ? (
+	{/* {!user ? (
  		<Login />
-	):(
+	):(*/}
 	  <div className="app_body">
 		  <Router>
 			<Sidebar />
@@ -30,7 +30,7 @@ function App() {
 		  </Router>
 		
 	  </div>
-	)}
+	{/*)}*/}
     </div>
   );
 }

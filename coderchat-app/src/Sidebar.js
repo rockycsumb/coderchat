@@ -33,13 +33,18 @@ function Sidebar() {
 			<div className="sidebar_header">
 				<Avatar src={user?.photoURL}/>
 				<div className="sidebar_headerRight">
-					<IconButton>
+					
+					<IconButton className="sidebar_rooms">
+						Ro
 						<DonutLargeIcon />
 					</IconButton>
+				    
 					<IconButton>
+						Pr
 						<ChatIcon />
 					</IconButton>
 					<IconButton>
+						So
 						<MoreVertIcon />
 					</IconButton>
 				</div>

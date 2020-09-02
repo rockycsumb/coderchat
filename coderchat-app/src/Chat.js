@@ -66,6 +66,7 @@ function Chat() {
 				</div>
 				
 				<div className="chat_headerRight">
+					
 					<IconButton>
 						<DonutLargeIcon />
 					</IconButton>
@@ -75,12 +76,15 @@ function Chat() {
 					<IconButton>
 						<MoreVertIcon />
 					</IconButton>
+					
 				</div>
 			</div>
 			
 			<div className="chat_body">
+				{/*<p className={`chat_message ${message.name === user.displayName && "chat_receiver"}`}> */}
 				{messages.map(message =>(
-				<p className={`chat_message ${message.name === user.displayName && "chat_receiver"}`}>
+			    
+				<p className="chat_message chat_receiver">
 					<span className="chat_name">
 						{message.name}
 					</span>

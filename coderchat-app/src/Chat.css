@@ -1,14 +1,12 @@
 .chat {
-	flex: 0.65;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
+	border: 4px blue solid;
 }
 
 .chat_header {
-	padding: 20px;
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid lightgray;
+	display: none;
 }
 
 .chat_headerInfo {
@@ -80,7 +78,7 @@
 .chat_footer > form {
 	flex: 1;
 	display: flex;
-	
+
 }
 
 .chat_footer > form > input {
@@ -98,3 +96,14 @@
 	padding: 10px;
 	color: gray;
 }
+
+@media only screen and (min-width: 768px){
+	.chat_header {
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid lightgray;
+	}
+}
+	
+

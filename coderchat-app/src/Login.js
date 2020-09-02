@@ -11,6 +11,7 @@ function Login(){
 		auth
 			.signInWithPopup(provider)
 			.then(result => {
+			console.log("from login", result);
 			dispatch({
 				type: actionTypes.SET_USER,
 				user: result.user
@@ -28,7 +29,7 @@ function Login(){
 						alt=""
 						/>
 					<div className="login_text">
-						<h1>Sign in to WhatsApp</h1>
+						<h1>Sign in to CoderChat</h1>
 					</div>
 
 					<Button onClick={signIn}>
