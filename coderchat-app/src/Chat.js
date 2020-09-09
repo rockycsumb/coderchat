@@ -10,6 +10,9 @@ import './Chat.css';
 import db from "./firebase";
 import firebase from 'firebase';
 import {useStateValue} from "./StateProvider";
+import 'emoji-mart/css/emoji-mart.css';
+import {Picker} from "emoji-mart";
+import Popover from '@material-ui/core/Popover';
 
 
 function Chat() {
@@ -19,6 +22,8 @@ function Chat() {
 	const [roomName, setRoomName] = useState("");
 	const [messages, setMessages] = useState([]);
 	const [{user}, dispatch] = useStateValue();
+	const[anchorEl, setAnchorEl] = useState(null);
+	
 	
 	useEffect(()=>{
 		if(roomId){
@@ -40,6 +45,18 @@ function Chat() {
 		
 	},[roomId])
 	
+	const handleEmojiPopup = (event) =>{
+		setAnchorEl(event.currentTarget);
+		
+	}
+	
+	const handleClose = () =>{
+		setAnchorEl(null);
+	}
+	
+	const open = Boolean(anchorEl);
+	const id = open ? 'simple-popover' : undefined;
+	
 	const sendMessage = (e) =>{
 		e.preventDefault();
 		
@@ -50,6 +67,11 @@ function Chat() {
 		})
 		
 		setInput('');
+	}
+	
+	const insertEmoji = (emoji) =>{
+		setInput(input + emoji.native);
+		handleClose();
 	}
 	
 	return(
@@ -77,9 +99,10 @@ function Chat() {
 			
 			<div className="chat_body">
 				{/*<p className={`chat_message ${message.name === user.displayName && "chat_receiver"}`}> */}
+				{/*<p className="chat_message chat_receiver">*/}
 				{messages.map(message =>(
 			    
-				<p className="chat_message chat_receiver">
+				<p className={`chat_message ${message.name === user.displayName && "chat_receiver"}`}>
 					<span className="chat_name">
 						{message.name}
 					</span>
@@ -92,7 +115,26 @@ function Chat() {
 			</div>
 			
 			<div className="chat_footer">
-			<InsertEmoticonIcon />
+				
+			<Popover
+					id={id}
+					open={open}
+					anchorEl={anchorEl}
+					onClose={handleClose}
+					anchorOrigin={{
+					  vertical: 'bottom',
+					  horizontal: 'center',
+					}}
+					transformOrigin={{
+					  vertical: 'top',
+					  horizontal: 'center',
+					}}
+				>
+				<Picker onSelect={insertEmoji} />
+			</Popover>
+			
+			
+			<InsertEmoticonIcon  onClick={handleEmojiPopup} />
 				<form>
 					<input 
 						placeholder="Type a message"
