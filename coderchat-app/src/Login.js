@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from '@material-ui/core';
 import './Login.css';
+import Register from './Register';
 import {auth, provider} from "./firebase";
 import {useStateValue} from "./StateProvider";
 import {actionTypes} from "./reducer";
@@ -20,6 +21,12 @@ function Login(){
 			.catch(error=>alert(error.message));
 	};
 	
+	const signInUserPass = () => {
+		console.log("sign in wih user and pass")
+	};
+	
+	
+	
 	return(
 		<div className='login'>
 			<div className="login_container">
@@ -35,6 +42,9 @@ function Login(){
 					<Button onClick={signIn}>
 						Sign In With Google
 					</Button>
+					<div>
+						<Register />
+					</div>
 			</div>
 		</div>
 	)
