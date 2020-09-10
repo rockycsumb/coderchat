@@ -7,6 +7,8 @@ import { SearchOutlined } from '@material-ui/icons';
 import SidebarChat from './SidebarChat';
 import db from "./firebase";
 import {useStateValue} from "./StateProvider";
+import {auth} from "./firebase";
+import {actionTypes} from "./reducer";
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
@@ -55,11 +57,27 @@ function Sidebar() {
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
 	
+	const handleLogout = () =>{
+		auth
+			.signOut()
+			.then((result)=>{
+			dispatch({
+				type: actionTypes.SET_USER,
+				user: null
+			})
+			
+		}).catch((error)=>{
+			console.log(error);
+		})
+	}
+	
+	const demoURL = require("./assets/demo.png");
+	
 	
 	return (
 		<div className="sidebar">
 			<div className="sidebar_header">
-				<Avatar src={user?.photoURL}/>
+				<Avatar src={user.email === "demo@demo.com" ? demoURL : user.photoURL}/>
 				<div className="sidebar_headerRight">
 					
 				
@@ -100,6 +118,7 @@ function Sidebar() {
 					 <Button
 						color="default"
 						startIcon={<ExitToAppIcon />}
+						onClick={handleLogout}
 					  >
 						Logout
 					</Button>

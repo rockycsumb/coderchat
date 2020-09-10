@@ -62,7 +62,7 @@ function Chat() {
 		
 		db.collection('rooms').doc(roomId).collection('messages').add({
 			message: input,
-			name: user.displayName,
+			name: user.displayName === null ? "Demo User" : user.displayName,
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		})
 		
@@ -81,10 +81,14 @@ function Chat() {
 				<Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
 				<div className="chat_headerInfo">
 					<h3>{roomName}</h3>
-					<p>Last seen {" "}
+					{messages.length > 0 ? (
+						<p>Last seen {" "}
+							{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}
+						</p>
+					):(
+						" ")
+					}
 					
-					{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}
-					</p>
 				</div>
 			</div>
 			
@@ -149,7 +153,6 @@ function Chat() {
 						Send a Message
 					</button>
 				</form>
-			<MicIcon />
 			</div>
 		</div>
 	)

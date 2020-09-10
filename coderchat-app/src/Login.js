@@ -12,7 +12,6 @@ function Login(){
 		auth
 			.signInWithPopup(provider)
 			.then(result => {
-			console.log("from login", result);
 			dispatch({
 				type: actionTypes.SET_USER,
 				user: result.user
@@ -21,11 +20,20 @@ function Login(){
 			.catch(error=>alert(error.message));
 	};
 	
-	const signInUserPass = () => {
-		console.log("sign in wih user and pass")
+	const signInDemo = () => {
+		auth
+		 	 .signInWithEmailAndPassword("demo@demo.com", "demoPassword")
+			 .then((user) => {
+			   console.log("user info ", user);
+			   dispatch({
+				   type: actionTypes.SET_USER,
+				   user: user.user
+			   })
+			 })
+			 .catch((error) => {
+			   console.log(error);
+			 });
 	};
-	
-	
 	
 	return(
 		<div className='login'>
@@ -38,14 +46,16 @@ function Login(){
 					<div className="login_text">
 						<h1>Sign in to CoderChat</h1>
 					</div>
-
-					<Button onClick={signIn}>
-						Sign In With Google
-					</Button>
-					<div>
-						<Register />
+					<div className="login_buttons">
+						<Button onClick={signIn}>
+							Sign In With Google
+						</Button>
+						<Button onClick={signInDemo}>
+							DEMO
+						</Button>
 					</div>
 			</div>
+			
 		</div>
 	)
 }
