@@ -24,6 +24,16 @@ function Chat() {
 	const [{user}, dispatch] = useStateValue();
 	const[anchorEl, setAnchorEl] = useState(null);
 	
+	const scrollFunction2 =()=>{
+        let e = document.getElementById("el1");
+        // This ends the block to the window 
+        // bottom and also aligns the view to the center 
+        e.scrollIntoView({
+          block: 'center',
+          behavior: 'smooth',
+          inline: 'end'
+        });
+      }
 	
 	useEffect(()=>{
 		if(roomId){
@@ -35,9 +45,14 @@ function Chat() {
 				.doc(roomId)
 				.collection("messages")
 				.orderBy('timestamp', 'asc')
-				.onSnapshot(snapshot => setMessages(snapshot.docs.map(doc => doc.data()))
+				.onSnapshot(snapshot => {
+				setMessages(snapshot.docs.map(doc => doc.data()))
+				scrollFunction2();
+			}
 			);
 		}
+		
+		
 	}, [roomId])
 	
 	useEffect(()=>{
@@ -62,10 +77,9 @@ function Chat() {
 		
 		db.collection('rooms').doc(roomId).collection('messages').add({
 			message: input,
-			name: user.displayName === null ? "Demo User" : user.displayName,
+			name: user.displayName,
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		})
-		
 		setInput('');
 	}
 	
@@ -115,7 +129,9 @@ function Chat() {
 						{new Date(message.timestamp?.toDate()).toUTCString()}
 					</span>
 				</p>
-				))} 
+				))}
+				<br /><br />				
+				<div id="el1" />
 			</div>
 			
 			<div className="chat_footer">

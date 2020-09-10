@@ -22,9 +22,8 @@ function Login(){
 	
 	const signInDemo = () => {
 		auth
-		 	 .signInWithEmailAndPassword("demo@demo.com", "demoPassword")
+		 	 .signInWithEmailAndPassword("demo@coderchat.com", "demouser")
 			 .then((user) => {
-			   console.log("user info ", user);
 			   dispatch({
 				   type: actionTypes.SET_USER,
 				   user: user.user

@@ -4,10 +4,9 @@ make profile page
 
 make RockyCoder Brand
 
-make messages scroll bottom auto
-
-
-
 
 // Done
 make demo user
+
+make messages scroll bottom auto
+

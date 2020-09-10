@@ -23,14 +23,16 @@ function Register(){
 	const handleSubmit = e => {
 		console.log("submit")
 		e.preventDefault();
-		// auth
-		// 	.createUserWithEmailAndPassword(email, password)
-		// 	.then((user)=>{
-		// 		console.log(user);
-		// 	})
-		// 	.catch((error)=>{
-		// 		console.log(error);
-		// 	});
+		auth
+			.createUserWithEmailAndPassword(email, password)
+			.then((user)=>{
+				user.user.updateProfile({
+					displayName: "demoGuy"
+				})
+			})
+			.catch((error)=>{
+				console.log(error);
+			});
 		
 	};
 	
