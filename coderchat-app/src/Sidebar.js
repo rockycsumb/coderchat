@@ -4,6 +4,7 @@ import PublicIcon from '@material-ui/icons/Public';
 import ChatIcon from '@material-ui/icons/Chat';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { SearchOutlined } from '@material-ui/icons';
+import CloseIcon from '@material-ui/icons/Close';
 import SidebarChat from './SidebarChat';
 import db from "./firebase";
 import {useStateValue} from "./StateProvider";
@@ -30,7 +31,10 @@ function Sidebar() {
 	const [rooms, setRooms] = useState([]);
 	const[{user}, dispatch] = useStateValue();
 	const[anchorEl, setAnchorEl] = useState(null);
+	const[searching, setSearching] = useState(false);
+	const[search, setSearch] = useState("");
 	const classes = useStyles();
+	const demoURL = require("./assets/demo.png");
 	
 	useEffect(()=>{
 		const unsubscribe = db.collection("rooms").onSnapshot(snapshot=>(
@@ -71,16 +75,21 @@ function Sidebar() {
 		})
 	}
 	
-	const demoURL = require("./assets/demo.png");
+	const onChange = e =>{
+		setSearching(true);
+		setSearch(e.target.value);
+	}
+	
+	const handleStopSearch = () =>{
+		setSearching(false);
+	}
 	
 	
 	return (
 		<div className="sidebar">
 			<div className="sidebar_header">
-				<Avatar src={user.email === "demo@demo.com" ? demoURL : user.photoURL}/>
-				<div className="sidebar_headerRight">
-					
-				
+				<Avatar src={user.email === "demo@coderchat.com" ? demoURL : user.photoURL}/>
+				<div className="sidebar_headerRight">				
 					 <Button
 						color="default"
 						startIcon={<PublicIcon />}
@@ -128,21 +137,46 @@ function Sidebar() {
 
 			<div className="sidebar_search">
 				<div className="sidebar_searchContainer">
-					<SearchOutlined />
-					<input placeholder="Search or start new Chat" type="text" />
+					{searching ? (
+						<CloseIcon  onClick={handleStopSearch}/>
+					):(
+						<SearchOutlined />
+					)}
+					
+					<input 
+						placeholder="Search or start new Chat"
+						name="search"
+						type="text"
+						
+						onChange={e=>onChange(e)}	
+					/>
 				</div>	
 			</div>
-			
-			<div className="sidebar_chats">
+			{searching ? (
+				<div className="sidebar_chats">
 				<SidebarChat addNewChat />
-				{rooms.map(room =>(
-					<SidebarChat 
-						key={room.id} 
-						id={room.id} 
-						name={room.data.name} 
-						/>
-				))}
-			</div>
+					{rooms.map(room => room.data.name === search && 
+						<SidebarChat 
+							key={room.id} 
+							id={room.id} 
+							name={room.data.name} 
+							/>
+					)}
+				</div>
+			):(
+				
+				<div className="sidebar_chats">
+				<SidebarChat addNewChat />
+					{rooms.map(room =>(
+						<SidebarChat 
+							key={room.id} 
+							id={room.id} 
+							name={room.data.name} 
+							/>
+					))}
+				</div>
+			)}
+			
 		</div>
 	)
 }

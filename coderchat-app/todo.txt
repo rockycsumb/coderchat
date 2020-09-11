@@ -1,4 +1,4 @@
-make search rooms
+
 
 make profile page
 
@@ -6,6 +6,7 @@ make RockyCoder Brand
 
 
 // Done
+make search rooms
 make demo user
 
 make messages scroll bottom auto
