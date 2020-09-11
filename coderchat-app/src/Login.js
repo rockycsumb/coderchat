@@ -37,22 +37,26 @@ function Login(){
 	return(
 		<div className='login'>
 			<div className="login_container">
-				<h1>login</h1>
+				
+					<h1>login</h1>
 					<img 
-						src={require("./assets/whatsapp.png")}
+						src={require("./assets/cclogo.png")}
 						alt=""
 						/>
-					<div className="login_text">
-						<h1>Sign in to CoderChat</h1>
-					</div>
-					<div className="login_buttons">
-						<Button onClick={signIn}>
-							Sign In With Google
-						</Button>
-						<Button onClick={signInDemo}>
-							DEMO
-						</Button>
-					</div>
+				
+				<div className="login_bottom">
+				<div className="login_text">
+					<h1>Sign in to CoderChat</h1>
+				</div>
+				<div className="login_buttons">
+					<Button onClick={signIn}>
+						Sign In With Google
+					</Button>
+					<Button onClick={signInDemo}>
+						DEMO
+					</Button>
+				</div>
+				</div>
 			</div>
 			
 		</div>
