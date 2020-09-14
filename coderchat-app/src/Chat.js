@@ -18,8 +18,8 @@ import Popover from '@material-ui/core/Popover';
 function Chat() {
 	const [seed, setSeed] = useState('');
 	const [input, setInput] = useState('');
-	const {roomId} = useParams();
-	const [roomName, setRoomName] = useState("");
+	let {roomId} = useParams();
+	const [roomName, setRoomName] = useState("Demo Room");
 	const [messages, setMessages] = useState([]);
 	const [{user}, dispatch] = useStateValue();
 	const[anchorEl, setAnchorEl] = useState(null);
@@ -34,7 +34,10 @@ function Chat() {
           inline: 'end'
         });
       }
-	
+	//NkXKahv9WIW2ElrCaoDw
+	if(roomId === undefined){
+		roomId = 'NkXKahv9WIW2ElrCaoDw';
+	}	
 	useEffect(()=>{
 		if(roomId){
 			db.collection("rooms")
@@ -46,12 +49,12 @@ function Chat() {
 				.collection("messages")
 				.orderBy('timestamp', 'asc')
 				.onSnapshot(snapshot => {
-				setMessages(snapshot.docs.map(doc => doc.data()))
+				setMessages(snapshot.docs.map(doc => doc.data()));
 				scrollFunction2();
 			}
+							
 			);
 		}
-		
 		
 	}, [roomId])
 	
@@ -72,7 +75,9 @@ function Chat() {
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
 	
+	
 	const sendMessage = (e) =>{
+		
 		e.preventDefault();
 		
 		db.collection('rooms').doc(roomId).collection('messages').add({
@@ -80,7 +85,7 @@ function Chat() {
 			name: user.displayName,
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		})
-		setInput('');
+		setInput('');		
 	}
 	
 	const insertEmoji = (emoji) =>{
@@ -155,7 +160,7 @@ function Chat() {
 			
 			
 			<InsertEmoticonIcon  onClick={handleEmojiPopup} />
-				<form>
+				<form onSubmit={e=> sendMessage(e)}>
 					<input 
 						placeholder="Type a message"
 						type="text"
@@ -164,7 +169,7 @@ function Chat() {
 					/>
 					<button
 						type="submit"
-						onClick={sendMessage}
+						onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}				
 						>
 						Send a Message
 					</button>
