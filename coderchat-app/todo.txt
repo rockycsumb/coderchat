@@ -1,6 +1,13 @@
 
 
-make RockyCoder Brand
+//notes Deploy
+// firebase login **already
+// firebase init
+// hosting setup
+// public directory change to build -> yes -> overwrite
+// npm run build
+// firebase deploy
+
 
 make profile page
 
@@ -10,6 +17,6 @@ make profile page
 // Done
 make search rooms
 make demo user
-
+make RockyCoder Brand
 make messages scroll bottom auto
 
